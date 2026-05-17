@@ -49,6 +49,11 @@ Elysian is a comprehensive, full-stack event management platform designed to str
 
 Developed and designed by **Nabajyoti Kalita**.
 
+## 👥 Collaborators
+
+*   **Juhi-Th**
+*   **Rohit Kumar** (@RohitKumar798)
+
 ## 📝 License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
