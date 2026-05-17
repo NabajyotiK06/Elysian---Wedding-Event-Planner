@@ -51,8 +51,8 @@ Developed and designed by **Nabajyoti Kalita**.
 
 ## 👥 Collaborators
 
-*   **Juhi-Th**
-*   **Rohit Kumar** (@RohitKumar798)
+*   [Juhi Th](https://github.com/Juhi-Th)
+*   [Rohit Kumar](https://github.com/RohitKumar798)
 
 ## 📝 License
 
