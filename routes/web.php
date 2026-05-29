@@ -27,4 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/guests/{guest}', [GuestController::class, 'update'])->name('guests.update');
     
     Route::get('/vendors', [VendorController::class, 'index'])->name('vendors.index');
+    Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendors.show');
+    Route::post('/vendors/{vendor}/book', [VendorController::class, 'book'])->name('vendors.book');
 });

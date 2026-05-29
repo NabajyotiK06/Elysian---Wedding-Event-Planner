@@ -8,7 +8,7 @@
     <a href="{{ route('events.edit', $event) }}" class="btn btn-secondary">Edit Event</a>
 </div>
 
-<div class="grid grid-cols-3 mb-4">
+<div class="grid grid-cols-4 mb-4">
     <div class="card stat-card" style="grid-column: span 2;">
         <div>
             <h3 style="margin-bottom: 0.5rem; color: var(--primary-dark);">{{ $event->title }}</h3>
@@ -20,12 +20,26 @@
             <p>{{ $event->description }}</p>
         </div>
     </div>
-    <div class="card stat-card flex-column" style="text-align: center; justify-content: center;">
-        <h2 style="font-size: 3rem; color: var(--primary-color); margin: 0;">{{ count($guests) }}</h2>
-        <p class="text-muted">Total Guests Invited</p>
-        <div class="d-flex gap-2 mt-2" style="font-size: 0.85rem;">
-            <span class="badge badge-attending">{{ $guests->where('rsvp_status', 'attending')->count() }} Attending</span>
-            <span class="badge badge-pending">{{ $guests->where('rsvp_status', 'pending')->count() }} Pending</span>
+    <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.5rem;">
+        <h2 style="font-size: 3.5rem; color: var(--primary-color); margin: 0; line-height: 1;">{{ count($guests) }}</h2>
+        <p class="text-muted" style="margin: 0; font-size: 1.1rem; font-weight: 500;">Total Guests Invited</p>
+        <div class="d-flex gap-2 mt-2" style="justify-content: center;">
+            <span class="badge badge-attending" style="padding: 0.5rem 1rem;">{{ $guests->where('rsvp_status', 'attending')->count() }} Attending</span>
+            <span class="badge badge-pending" style="padding: 0.5rem 1rem;">{{ $guests->where('rsvp_status', 'pending')->count() }} Pending</span>
+        </div>
+    </div>
+    <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.5rem;">
+        <h2 style="font-size: 2.5rem; color: var(--primary-color); margin: 0; line-height: 1;">${{ number_format($event->budget) }}</h2>
+        <p class="text-muted" style="margin: 0; font-size: 1.1rem; font-weight: 500;">Total Budget</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; width: 100%; max-width: 200px;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                <span class="text-muted">Spent:</span>
+                <span style="color: #e74c3c; font-weight: 600;">${{ number_format($event->total_vendor_cost) }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-top: 0.25rem;">
+                <span class="text-muted">Remaining:</span>
+                <span style="color: #2ecc71; font-weight: 600;">${{ number_format($event->remaining_budget) }}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -98,6 +112,51 @@
                 @empty
                     <tr>
                         <td colspan="5" class="text-center" style="padding: 1.5rem;">No guests added yet.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="d-flex justify-between align-center mb-3">
+        <h3>Booked Vendors</h3>
+        <a href="{{ route('vendors.index') }}" class="btn btn-outline">Browse Vendors</a>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Vendor Name</th>
+                    <th>Type</th>
+                    <th>Booking Date</th>
+                    <th>Cost</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($event->vendors as $vendor)
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="{{ $vendor->image_url ?? 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800' }}" alt="{{ $vendor->name }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
+                                <strong>{{ $vendor->name }}</strong>
+                            </div>
+                        </td>
+                        <td>{{ $vendor->type }}</td>
+                        <td>{{ \Carbon\Carbon::parse($vendor->pivot->booking_date)->format('M d, Y') }}</td>
+                        <td style="font-weight: 600;">${{ number_format($vendor->price) }}</td>
+                        <td>
+                            <span class="badge" style="background: var(--primary-light); color: var(--primary-dark);">
+                                {{ $vendor->pivot->status }}
+                            </span>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding: 1.5rem;">No vendors booked yet.</td>
                     </tr>
                 @endforelse
             </tbody>

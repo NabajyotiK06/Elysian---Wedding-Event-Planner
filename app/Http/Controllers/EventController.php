@@ -42,6 +42,7 @@ class EventController extends Controller
             abort(403);
         }
         
+        $event->load('vendors');
         $guests = Guest::where('event_id', $event->id)->get();
         return view('events.show', compact('event', 'guests'));
     }

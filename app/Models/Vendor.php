@@ -15,4 +15,11 @@ class Vendor extends Model
         'description',
         'image_url'
     ];
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_vendor')
+                    ->withPivot('booking_date', 'status')
+                    ->withTimestamps();
+    }
 }

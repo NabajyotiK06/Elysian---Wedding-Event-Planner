@@ -24,4 +24,21 @@ class Event extends Model
     {
         return $this->hasMany(Guest::class);
     }
+
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class, 'event_vendor')
+                    ->withPivot('booking_date', 'status')
+                    ->withTimestamps();
+    }
+
+    public function getTotalVendorCostAttribute()
+    {
+        return $this->vendors->sum('price');
+    }
+
+    public function getRemainingBudgetAttribute()
+    {
+        return $this->budget - $this->total_vendor_cost;
+    }
 }

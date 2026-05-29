@@ -3,20 +3,20 @@
 
 :root {
     --primary-color: #d4af37; /* Gold */
-    --primary-light: #f9f6ef;
+    --primary-light: #fdfaf2;
     --primary-dark: #b8972e;
-    --secondary-color: #2c3e50; /* Navy */
+    --secondary-color: #1e293b; /* Slate 800 */
     --accent-color: #e87e9c; /* Rose */
-    --background-color: #fafafa;
+    --background-color: #e2e8f0; /* Darker gray for clear separation */
     --surface-color: #ffffff;
-    --text-color: #333333;
-    --text-muted: #777777;
-    --border-color: #eaeaea;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
-    --border-radius: 12px;
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --text-color: #334155;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1; /* Darker border */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -26,16 +26,19 @@
 }
 
 body {
+    font-size: 16px;
     font-family: 'Outfit', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
     color: var(--secondary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+    font-weight: 600;
 }
 
 a {
@@ -88,33 +91,18 @@ a:hover {
 
 .nav-item {
     display: block;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
+    margin: 0 1rem 0.5rem 1rem;
+    border-radius: 12px;
     color: var(--text-muted);
     font-weight: 500;
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background: var(--primary-color);
-    transform: scaleY(0);
     transition: var(--transition);
-    transform-origin: left;
 }
 
 .nav-item:hover, .nav-item.active {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     background: var(--primary-light);
-}
-
-.nav-item:hover::before, .nav-item.active::before {
-    transform: scaleY(1);
+    transform: translateX(4px);
 }
 
 .sidebar-footer {
@@ -134,9 +122,11 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    padding: 1.25rem 2.5rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     margin-bottom: 2rem;
     box-shadow: var(--shadow-sm);
@@ -160,10 +150,10 @@ a:hover {
 .card {
     background: var(--surface-color);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.02);
+    border: 1px solid var(--border-color);
 }
 
 .card:hover {
@@ -173,7 +163,7 @@ a:hover {
 
 .btn {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
+    padding: 0.875rem 1.75rem;
     border-radius: 8px;
     font-weight: 500;
     cursor: pointer;
@@ -236,7 +226,7 @@ a:hover {
 
 .form-control {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 1rem 1.25rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-family: inherit;
@@ -247,7 +237,7 @@ a:hover {
 .form-control:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
     background: var(--surface-color);
 }
 
@@ -271,6 +261,7 @@ a:hover {
 .mt-2 { margin-top: 1rem; }
 .mt-4 { margin-top: 2rem; }
 .d-flex { display: flex; }
+.flex-column { flex-direction: column; }
 .justify-between { justify-content: space-between; }
 .align-center { align-items: center; }
 .gap-2 { gap: 0.5rem; }
@@ -314,9 +305,10 @@ a:hover {
 }
 
 .table th, .table td {
-    padding: 1rem;
+    padding: 1.25rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
 }
 
 .table th {

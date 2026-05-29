@@ -50,7 +50,7 @@
             <p style="font-size: 0.95rem; margin-bottom: 1.5rem; height: 3rem; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
                 {{ $vendor->description }}
             </p>
-            <button class="btn btn-outline" style="width: 100%;">Contact Vendor</button>
+            <a href="{{ route('vendors.show', $vendor) }}" class="btn btn-outline" style="width: 100%; text-align: center; display: block; box-sizing: border-box;">Contact Vendor</a>
         </div>
     @empty
         <div style="grid-column: span 3; text-align: center; padding: 4rem; background: var(--surface-color); border-radius: var(--border-radius);">

@@ -27,4 +27,27 @@ class VendorController extends Controller
 
         return view('vendors.index', compact('vendors'));
     }
+
+    public function show(Vendor $vendor)
+    {
+        $events = auth()->user()->events()->orderBy('date')->get();
+        return view('vendors.show', compact('vendor', 'events'));
+    }
+
+    public function book(Request $request, Vendor $vendor)
+    {
+        $request->validate([
+            'event_id' => 'required|exists:events,id',
+            'booking_date' => 'required|date'
+        ]);
+
+        $event = auth()->user()->events()->findOrFail($request->event_id);
+        
+        $event->vendors()->attach($vendor->id, [
+            'booking_date' => $request->booking_date,
+            'status' => 'Booked'
+        ]);
+
+        return redirect()->route('vendors.show', $vendor)->with('success', 'Vendor successfully booked for your event!');
+    }
 }
