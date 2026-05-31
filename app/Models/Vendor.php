@@ -13,8 +13,19 @@ class Vendor extends Model
         'price',
         'rating',
         'description',
-        'image_url'
+        'image_url',
+        'is_custom',
+        'user_id',
     ];
+
+    protected $casts = [
+        'is_custom' => 'boolean',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function events()
     {

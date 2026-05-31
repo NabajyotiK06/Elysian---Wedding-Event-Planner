@@ -293,7 +293,7 @@
             <div class="hero-text">
                 <h1>Your <span class="text-gold">Vision,</span><br>Perfectly<br>Planned</h1>
                 <p>Elysian Events provides you with the ultimate toolkit to manage guests, coordinate vendors, and keep track of your budget with elegance and ease.</p>
-                <a href="{{ route('register') }}" class="btn" style="border: 1px solid var(--primary-dark); color: var(--primary-dark); padding: 1rem 2.5rem; border-radius: 4px; font-weight: 500; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Start Planning</a>
+                <a href="{{ route('login') }}" class="btn" style="border: 1px solid var(--primary-dark); color: var(--primary-dark); padding: 1rem 2.5rem; border-radius: 4px; font-weight: 500; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Start Planning</a>
             </div>
         </div>
         <div class="hero-right"></div>

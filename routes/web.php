@@ -29,4 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/vendors', [VendorController::class, 'index'])->name('vendors.index');
     Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->name('vendors.show');
     Route::post('/vendors/{vendor}/book', [VendorController::class, 'book'])->name('vendors.book');
+
+    Route::post('/events/{event}/custom-vendor', [EventController::class, 'addCustomVendor'])->name('events.add-custom-vendor');
+    Route::delete('/events/{event}/vendors/{vendor}', [EventController::class, 'removeVendor'])->name('events.remove-vendor');
 });
